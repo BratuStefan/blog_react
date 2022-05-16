@@ -10,3 +10,4 @@ function Blog() {
 }
 
 export default Blog;
+// use params se uita in paginile dinamice si converteste datele intr-o variaila

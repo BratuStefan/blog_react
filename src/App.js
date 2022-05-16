@@ -26,3 +26,5 @@ export default App;
 // footer-ul trebuie sa il punem pe toate
 // ultima componeta din fiecare pagina trebie sa fie footer
 // container normal e standard
+// search, categories componente separeate
+// produs componenta comuna
