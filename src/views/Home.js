@@ -36,7 +36,7 @@ function Home() {
 			<Row>
 				{posts ? (
 					<>
-						{posts.slice[(0, postCounter)].map((post, index) => {
+						{posts.slice(0, postCounter).map((post, index) => {
 							return <Post post={post} key={"post_" + index} />;
 						})}
 					</>
@@ -58,3 +58,4 @@ function Home() {
 }
 
 export default Home;
+// pagini - impartim numarul de produse la cate pagini avem
