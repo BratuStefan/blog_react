@@ -12,7 +12,7 @@ function App() {
 				<div style={{ marginTop: "90px" }}>
 					<Routes>
 						<Route path='/' element={<Home />}></Route>
-						<Route path='/blog/:blogid' element={<Blog />}></Route>
+						<Route path='/blog/:blogId' element={<Blog />}></Route>
 						<Route path='/wishlist' element={<Wishlist />}></Route>
 					</Routes>
 				</div>

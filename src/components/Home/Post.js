@@ -32,8 +32,7 @@ function Post({ post }) {
 			</Link>
 
 			<div style={{ minHeight: "50px" }}>
-				{showButton}
-				<Button outline>Add to wishlist</Button>
+				{showButton ? <Button outline>Add to wishlist</Button> : ""}
 			</div>
 		</Col>
 	);
