@@ -28,3 +28,5 @@ export default App;
 // container normal e standard
 // search, categories componente separeate
 // produs componenta comuna
+// remove form local storage si pupa aia sters din state local
+// dont forget loading and links fro the project
