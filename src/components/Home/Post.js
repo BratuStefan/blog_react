@@ -1,6 +1,7 @@
 import { Col, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { addToWishList } from "../../helpers";
 
 function Post({ post }) {
 	const [showButton, setShowbutton] = useState(false);
@@ -32,7 +33,17 @@ function Post({ post }) {
 			</Link>
 
 			<div style={{ minHeight: "50px" }}>
-				{showButton ? <Button outline>Add to wishlist</Button> : ""}
+				{showButton ? (
+					<Button
+						outline
+						onClick={() => {
+							addToWishList(post);
+						}}>
+						Add to wishlist
+					</Button>
+				) : (
+					""
+				)}
 			</div>
 		</Col>
 	);

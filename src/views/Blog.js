@@ -3,11 +3,13 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { useState, useEffect } from "react";
 import Footer from "../common/Footer";
 import "./Blog.css";
+import { addToWishList } from "../helpers";
 
 function Blog() {
 	const params = useParams();
 	const [post, setPost] = useState(null);
 	const [user, setUser] = useState(null);
+	const [comments, setComments] = useState(null);
 
 	const getBlog = async (blogId) => {
 		const responseData = await fetch(
@@ -25,6 +27,14 @@ function Blog() {
 		setUser(apiUser);
 	};
 
+	const getComments = async (postId) => {
+		const responseData = await fetch(
+			"https://jsonplaceholder.typicode.com/users/" + postId
+		);
+		const apiComments = await responseData.json();
+		setComments(apiComments);
+	};
+
 	useEffect(() => {
 		if (params && params.blogId) {
 			getBlog(params.blogId);
@@ -35,7 +45,13 @@ function Blog() {
 		if (post && post.userId) {
 			getUser(post.userId);
 		}
+
+		if (post && post.id) {
+			getComments(post.id);
+		}
 	}, [post]);
+
+	<addToWishList />;
 
 	return (
 		<>
@@ -51,7 +67,13 @@ function Blog() {
 						<Row>
 							<h1>{post.title}</h1>
 							<h3 style={{ minHeight: "500px" }}>{post.body}</h3>
-							<Button className='mt-4 mb-4'>Add to wishlist!</Button>
+							<Button
+								className='mt-4 mb-4'
+								onClick={() => {
+									addToWishList(post);
+								}}>
+								Add to wishlist!
+							</Button>
 						</Row>
 						<Row>
 							<div className='author_container mt-4'>
@@ -68,6 +90,7 @@ function Blog() {
 				) : (
 					<div>Loading...</div>
 				)}
+				{comments && (<h2>Comments</h2> {comments.map((comments)=>{return <Row className="mt-2 p-2"><h2>{comments.name} -- {comments.email}</h2> <p>{comments.body}</p></Row>})})}
 			</Container>
 			<Footer />
 		</>
