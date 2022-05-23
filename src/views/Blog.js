@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Button } from "reactstrap";
 import { useState, useEffect } from "react";
+import { addToWishlist } from "../helpers";
 import Footer from "../common/Footer";
 import "./Blog.css";
-import { addToWishList } from "../helpers";
 
 function Blog() {
 	const params = useParams();
@@ -29,7 +29,7 @@ function Blog() {
 
 	const getComments = async (postId) => {
 		const responseData = await fetch(
-			"https://jsonplaceholder.typicode.com/users/" + postId
+			"https://jsonplaceholder.typicode.com/comments?postId=" + postId
 		);
 		const apiComments = await responseData.json();
 		setComments(apiComments);
@@ -45,13 +45,10 @@ function Blog() {
 		if (post && post.userId) {
 			getUser(post.userId);
 		}
-
 		if (post && post.id) {
 			getComments(post.id);
 		}
 	}, [post]);
-
-	<addToWishList />;
 
 	return (
 		<>
@@ -70,7 +67,7 @@ function Blog() {
 							<Button
 								className='mt-4 mb-4'
 								onClick={() => {
-									addToWishList(post);
+									addToWishlist(post);
 								}}>
 								Add to wishlist!
 							</Button>
@@ -90,7 +87,21 @@ function Blog() {
 				) : (
 					<div>Loading...</div>
 				)}
-				{comments && (<h2>Comments</h2> {comments.map((comments)=>{return <Row className="mt-2 p-2"><h2>{comments.name} -- {comments.email}</h2> <p>{comments.body}</p></Row>})})}
+				{comments && (
+					<>
+						<h2 className='mt-4'>Comentarii:</h2>
+						{comments.map((comment) => {
+							return (
+								<Row className='mt-2 p-2'>
+									<h4>
+										{comment.name} -- {comment.email}
+									</h4>
+									<p>{comment.body}</p>
+								</Row>
+							);
+						})}
+					</>
+				)}
 			</Container>
 			<Footer />
 		</>

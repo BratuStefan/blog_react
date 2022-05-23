@@ -1,17 +1,18 @@
-export const addToWishList = (post) => {
-	const postListStorage = localStorage.getItem("postLIst");
+export const addToWishlist = (post) => {
+	const postListStorage = localStorage.getItem("postList");
 	if (postListStorage === null) {
 		const postList = [];
 		postList.push(post);
-		localStorage.setItem("postlist", JSON.stringify(postList));
+		localStorage.setItem("postList", JSON.stringify(postList));
 	} else {
 		const storageArray = JSON.parse(postListStorage);
 		if (
 			!storageArray.find((postStorage) => {
-				return postStorage === post.id;
+				return postStorage.id === post.id;
 			})
-		)
+		) {
 			storageArray.push(post);
-		localStorage.setItem("postlist", JSON.stringify(storageArray));
+			localStorage.setItem("postList", JSON.stringify(storageArray));
+		}
 	}
 };
