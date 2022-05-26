@@ -10,7 +10,7 @@ function Home() {
 	const [postCounter, setPostCounter] = useState(counterSize);
 	const getPosts = async () => {
 		const responseData = await fetch(
-			"https:jsonplaceholder.typicode.com/posts"
+			"https://jsonplaceholder.typicode.com/posts"
 		);
 		const apiPosts = await responseData.json();
 		setPosts(apiPosts);
